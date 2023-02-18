@@ -1,4 +1,4 @@
-package org.gpadula.AI2SJobFairApp;
+package org.gpadula.ai2sjobfairapp;
 
 import javax.swing.*;
 

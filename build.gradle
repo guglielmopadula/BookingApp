@@ -40,4 +40,4 @@ dependencies {
 test {
     useJUnitPlatform()
     }
-mainClassName = 'org.gpadula.AI2SJobFairApp.Main'
+mainClassName = 'org.gpadula.ai2sjobfairapp.Main'

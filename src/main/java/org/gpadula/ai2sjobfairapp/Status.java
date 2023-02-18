@@ -1,4 +1,4 @@
-package org.gpadula.AI2SJobFairApp;
+package org.gpadula.ai2sjobfairapp;
 
 public enum Status {
     MODIFIABLE,BLOCKED,NONMODIFIABLE,SELECTED

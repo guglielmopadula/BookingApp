@@ -1,4 +1,4 @@
-package org.gpadula.AI2SJobFairApp;
+package org.gpadula.ai2sjobfairapp;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class Main extends JFrame {
         rowdata="righe.csv";
         columndata="colonne.csv";
         String[][] data=Utils.readCsv(stringdata);
-        String[][] data_bak=Utils.readCsv(stringdata);
+        String[][] databak=Utils.readCsv(stringdata);
         String[][] column=Utils.readCsv(columndata);
         String[][] row=Utils.readCsv(rowdata);
         BookingTable table= new BookingTable(data,row,column);
@@ -29,8 +29,7 @@ public class Main extends JFrame {
         JButton button= new JButton();
         button.setText("Register");
         button.setBounds(50,500,95,30);
-
-        Frame frame= new Frame(person,table,button,data_bak, stringdata,endstatus);
+        Frame frame= new Frame(person,table,button,databak, stringdata,endstatus);
     }
     public static void main(String[] args) throws IOException {
         try {
@@ -40,4 +39,6 @@ public class Main extends JFrame {
         }
         Main main=new Main();
     }
+    
+    
 }

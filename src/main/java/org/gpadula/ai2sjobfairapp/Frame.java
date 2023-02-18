@@ -1,4 +1,4 @@
-package org.gpadula.AI2SJobFairApp;
+package org.gpadula.ai2sjobfairapp;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,24 +9,40 @@ import java.util.Arrays;
 
 public class Frame extends JFrame {
     BookingTable table;
-
+    PersonDataField person;
+    String stringdata;
+    JTextArea endstatus;
+    String[][] data;
+    JButton button;
     public Frame(PersonDataField person, BookingTable table, JButton button, String[][] data, String stringdata, JTextArea endstatus) {
         this.table = table;
-        this.add(button);
-        this.add(person.namefield);
-        this.add(person.namelabel);
-        this.add(person.surnamefield);
-        this.add(person.surnamelabel);
-        this.add(person.emailfield);
-        this.add(person.emaillabel);
-        this.add(table);
-        this.add(table.rows);
-        this.add(table.columns);
+        this.person=person;
+        this.endstatus=endstatus;
+        this.button=button;
+        this.data=data;
+        this.stringdata=stringdata;
+        this.add(this.button);
+        this.add(this.person.namefield);
+        this.add(this.person.namelabel);
+        this.add(this.person.surnamefield);
+        this.add(this.person.surnamelabel);
+        this.add(this.person.emailfield);
+        this.add(this.person.emaillabel);
+        this.add(this.table);
+        this.add(this.table.rows);
+        this.add(this.table.columns);
         this.setSize(1000, 1000);
         this.setLayout(null);
         this.setVisible(true);
         this.add(endstatus);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTable();
+        this.setButton();
+
+    }
+
+
+    private void setTable(){
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -38,16 +54,7 @@ public class Frame extends JFrame {
                 } else {
                     if (table.statuses[row][col] == Status.SELECTED) {
                         table.statuses[row][col] = Status.MODIFIABLE;
-                        for (int i = 0; i < table.getRowCount(); i++) {
-                            if (table.statuses[i][col] == Status.NONMODIFIABLE) {
-                                table.statuses[i][col] = Status.MODIFIABLE;
-                            }
-                        }
-                        for (int j = 0; j < table.getColumnCount(); j++) {
-                            if (table.statuses[row][j] == Status.NONMODIFIABLE) {
-                                table.statuses[row][j] = Status.MODIFIABLE;
-                            }
-                        }
+                        set_modifiable_inner(row,col);
                     }
                     for (int i = 0; i < table.getRowCount(); i++) {
                         for (int j = 0; j < table.getColumnCount(); j++) {
@@ -63,6 +70,44 @@ public class Frame extends JFrame {
             }
         });
 
+    }
+
+    private void myrepaint() {
+        this.repaint();
+    }
+
+    private void mydispose() {
+        this.setVisible(false);
+        this.dispose();
+    }
+
+    private void set_unmodifiable_inner(int row, int col) {
+        for (int i = 0; i < table.getRowCount(); i++) {
+            if (table.statuses[i][col] == Status.MODIFIABLE) {
+                table.statuses[i][col] = Status.NONMODIFIABLE;
+            }
+        }
+        for (int j = 0; j < table.getColumnCount(); j++) {
+            if (table.statuses[row][j] == Status.MODIFIABLE) {
+                table.statuses[row][j] = Status.NONMODIFIABLE;
+            }
+        }
+
+    }
+    private void set_modifiable_inner(int row, int col) {
+        for (int i = 0; i < table.getRowCount(); i++) {
+            if (table.statuses[i][col] == Status.NONMODIFIABLE) {
+                table.statuses[i][col] = Status.MODIFIABLE;
+            }
+        }
+        for (int j = 0; j < table.getColumnCount(); j++) {
+            if (table.statuses[row][j] == Status.NONMODIFIABLE) {
+                table.statuses[row][j] = Status.MODIFIABLE;
+            }
+        }
+        }
+
+    private void setButton(){
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String name = person.namefield.getText().replaceAll("\\s+","");
@@ -116,27 +161,5 @@ public class Frame extends JFrame {
         });
     }
 
-    public void myrepaint() {
-        this.repaint();
-    }
-
-    public void mydispose() {
-        this.setVisible(false);
-        this.dispose();
-    }
-
-    private void set_unmodifiable_inner(int row, int col) {
-        for (int i = 0; i < table.getRowCount(); i++) {
-            if (table.statuses[i][col] == Status.MODIFIABLE) {
-                table.statuses[i][col] = Status.NONMODIFIABLE;
-            }
-        }
-        for (int j = 0; j < table.getColumnCount(); j++) {
-            if (table.statuses[row][j] == Status.MODIFIABLE) {
-                table.statuses[row][j] = Status.NONMODIFIABLE;
-            }
-        }
 
     }
-
-}

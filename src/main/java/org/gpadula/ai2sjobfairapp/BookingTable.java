@@ -1,9 +1,8 @@
-package org.gpadula.AI2SJobFairApp;
+package org.gpadula.ai2sjobfairapp;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.io.IOException;
 import java.util.Arrays;
 
 public class BookingTable extends JTable {
@@ -12,15 +11,15 @@ public class BookingTable extends JTable {
 
     Status[][] statuses;
 
-    public BookingTable(String[][] data, String[][] row,  String[][] column) throws IOException {
+    public BookingTable(String[][] data, String[][] row,  String[][] column) {
         super(data,column[0]);
         this.setBounds(60, 200, 500, 300);
-        String[] column_row= new String[1];
-        String[] column_column= new String[column[0].length];
-        Arrays.fill(column_column,"");
-        Arrays.fill(column_row,"");
-        rows= new JTable(row,column_row);
-        columns=new JTable(column,column_column);
+        String[] columnrow= new String[1];
+        String[] columncolumn= new String[column[0].length];
+        Arrays.fill(columncolumn,"");
+        Arrays.fill(columnrow,"");
+        rows= new JTable(row,columnrow);
+        columns=new JTable(column,columncolumn);
         columns.setBounds(60,150,500,50);
         columns.setRowHeight(50);
         rows.setRowHeight(50);

@@ -1,4 +1,4 @@
-package org.gpadula.AI2SJobFairApp;
+package org.gpadula.ai2sjobfairapp;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -32,14 +32,9 @@ public class Utils {
             }
 
         }
-        FileWriter myWriter=null;
-        try {
-            myWriter = new FileWriter(file);
-            myWriter.write(s);
-        }
-        finally {
-            myWriter.close();
-        }
+        FileWriter myWriter = new FileWriter(file);
+        myWriter.write(s);
+        myWriter.close();
     }
 
 }
