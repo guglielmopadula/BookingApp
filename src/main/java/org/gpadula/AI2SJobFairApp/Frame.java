@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Frame extends JFrame {
     BookingTable table;
 
-    public Frame(PersonDataField person, BookingTable table, Button button, String[][] data, String stringdata, JTextArea endstatus) {
+    public Frame(PersonDataField person, BookingTable table, JButton button, String[][] data, String stringdata, JTextArea endstatus) {
         this.table = table;
         this.add(button);
         this.add(person.namefield);
@@ -67,7 +67,7 @@ public class Frame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String name = person.namefield.getText().replaceAll("\\s+","");
                 String surname = person.surnamefield.getText().replaceAll("\\s+","");
-                String email= person.surnamefield.getText().replaceAll("\\s+","");
+                String email= person.emailfield.getText().replaceAll("\\s+","");
                 int flag = 0;
 
                 try {

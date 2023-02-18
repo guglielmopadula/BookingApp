@@ -1,18 +1,8 @@
 package org.gpadula.AI2SJobFairApp;
 import javax.swing.*;
-import java.awt.event.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import com.formdev.flatlaf.FlatLightLaf;
-import java.util.ArrayList;
-import java.util.List;
-
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 
 public class Main extends JFrame {
@@ -36,7 +26,7 @@ public class Main extends JFrame {
         endstatus.setFont(font1);
         endstatus.setEditable(false);
         endstatus.setBounds(0,550,700,200);
-        Button button= new Button(person, table, data_bak, stringdata,endstatus);
+        JButton button= new JButton();
         button.setText("Register");
         button.setBounds(50,500,95,30);
 

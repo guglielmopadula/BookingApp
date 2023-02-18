@@ -1,7 +1,6 @@
 package org.gpadula.AI2SJobFairApp;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 
 public class PersonDataField
 {

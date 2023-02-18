@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
-    FileWriter myWriter;
     static String[][] readCsv(String file) throws IOException {
         List<String[]> lines = new ArrayList<>();
         try (BufferedReader r = new BufferedReader(new FileReader(file))) {
