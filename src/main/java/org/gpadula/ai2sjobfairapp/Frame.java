@@ -81,12 +81,12 @@ public class Frame extends JFrame {
     private void setUnmodifiableInner(int row, int col) {
         for (int i = 0; i < table.getRowCount(); i++) {
             if (table.statuses[i][col] == Status.MODIFIABLE) {
-                table.statuses[i][col] = Status.NONMODIFIABLE;
+                table.statuses[i][col] = Status.NOTMODIFIABLE;
             }
         }
         for (int j = 0; j < table.getColumnCount(); j++) {
             if (table.statuses[row][j] == Status.MODIFIABLE) {
-                table.statuses[row][j] = Status.NONMODIFIABLE;
+                table.statuses[row][j] = Status.NOTMODIFIABLE;
             }
         }
 
@@ -94,12 +94,12 @@ public class Frame extends JFrame {
 
     private void setModifiableInner(int row, int col) {
         for (int i = 0; i < table.getRowCount(); i++) {
-            if (table.statuses[i][col] == Status.NONMODIFIABLE) {
+            if (table.statuses[i][col] == Status.NOTMODIFIABLE) {
                 table.statuses[i][col] = Status.MODIFIABLE;
             }
         }
         for (int j = 0; j < table.getColumnCount(); j++) {
-            if (table.statuses[row][j] == Status.NONMODIFIABLE) {
+            if (table.statuses[row][j] == Status.NOTMODIFIABLE) {
                 table.statuses[row][j] = Status.MODIFIABLE;
             }
         }
@@ -140,7 +140,7 @@ public class Frame extends JFrame {
                     endstatus.setText("You have been too slow, please reopen the page");
                 }
             } catch (IOException ex) {
-                throw new RuntimeException(ex);
+                throw new MessageException("Errore di IO");
             }
         });
     }

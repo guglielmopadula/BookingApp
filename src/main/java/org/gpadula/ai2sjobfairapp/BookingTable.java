@@ -63,7 +63,7 @@ public class BookingTable extends JTable {
         if (status.equals(Status.BLOCKED)) {
                 comp.setBackground(Color.red);
             }
-        if (status.equals(Status.NONMODIFIABLE)) {
+        if (status.equals(Status.NOTMODIFIABLE)) {
             comp.setBackground(Color.black);
         }
 

@@ -35,7 +35,6 @@ public class Main extends JFrame {
         button.setText("Register");
         button.setBounds(50, 500, 95, 30);
         frame = new Frame(person, table, button, databak, stringdata, endstatus);
-        Logger logger = Logger.getLogger(Main.class.getName());
     }
 
     public static void main(String[] args) throws IOException {
