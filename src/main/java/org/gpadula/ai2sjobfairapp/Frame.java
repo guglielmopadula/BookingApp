@@ -110,22 +110,14 @@ public class Frame extends JFrame {
             String name = person.namefield.getText().replaceAll("\\s+", "");
             String surname = person.surnamefield.getText().replaceAll("\\s+", "");
             String email = person.emailfield.getText().replaceAll("\\s+", "");
-            int flag = 0;
 
             try {
                 String[][] data2 = Utils.readCsv(stringdata);
                 if (Arrays.deepEquals(data, data2)) {
                     if (!(name.equals("") || surname.equals("") || email.equals(""))) {
-                        for (int i = 0; i < table.getRowCount(); i++) {
-                            for (int j = 0; j < table.getColumnCount(); j++) {
-                                if (table.statuses[i][j] == Status.SELECTED) {
-                                    data2[i][j] = name + " " + surname + " " + email;
-                                    flag = 1;
-                                }
-                            }
-                        }
 
-                        if (flag == 1) {
+                        if (checkEdit()) {
+                            data2=updateData(data2);
                             Utils.writeCSV(data2, "dati.csv", table.getRowCount(), table.getColumnCount());
                             endstatus.setForeground(Color.green);
                             endstatus.setText("You have successfully registered \n The application will close in 10s");
@@ -153,5 +145,28 @@ public class Frame extends JFrame {
         });
     }
 
+    boolean checkEdit() {
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                if (table.statuses[i][j] == Status.SELECTED) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+    String[][] updateData(String[][] data2) {
+        String name = person.namefield.getText().replaceAll("\\s+", "");
+        String surname = person.surnamefield.getText().replaceAll("\\s+", "");
+        String email = person.emailfield.getText().replaceAll("\\s+", "");
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                if (table.statuses[i][j] == Status.SELECTED) {
+                    data2[i][j] = name + " " + surname + " " + email;
+                }
+            }
+        }
+        return data2;
+    }
 }

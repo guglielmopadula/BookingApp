@@ -3,6 +3,7 @@ package org.gpadula.ai2sjobfairapp;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
@@ -34,13 +35,14 @@ public class Main extends JFrame {
         button.setText("Register");
         button.setBounds(50, 500, 95, 30);
         frame = new Frame(person, table, button, databak, stringdata, endstatus);
+        Logger logger = Logger.getLogger(Main.class.getName());
     }
 
     public static void main(String[] args) throws IOException {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
+            throw new MessageException("failed to apply theme");
         }
         Main main = new Main();
         main.start();
