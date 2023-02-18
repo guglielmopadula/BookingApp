@@ -2,8 +2,6 @@ package org.gpadula.ai2sjobfairapp;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -14,13 +12,14 @@ public class Frame extends JFrame {
     JTextArea endstatus;
     String[][] data;
     JButton button;
+
     public Frame(PersonDataField person, BookingTable table, JButton button, String[][] data, String stringdata, JTextArea endstatus) {
         this.table = table;
-        this.person=person;
-        this.endstatus=endstatus;
-        this.button=button;
-        this.data=data;
-        this.stringdata=stringdata;
+        this.person = person;
+        this.endstatus = endstatus;
+        this.button = button;
+        this.data = data;
+        this.stringdata = stringdata;
         this.add(this.button);
         this.add(this.person.namefield);
         this.add(this.person.namelabel);
@@ -40,7 +39,7 @@ public class Frame extends JFrame {
     }
 
 
-     void setTable(){
+    void setTable() {
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -52,7 +51,7 @@ public class Frame extends JFrame {
                 } else {
                     if (table.statuses[row][col] == Status.SELECTED) {
                         table.statuses[row][col] = Status.MODIFIABLE;
-                        setModifiableInner(row,col);
+                        setModifiableInner(row, col);
                     }
                     for (int i = 0; i < table.getRowCount(); i++) {
                         for (int j = 0; j < table.getColumnCount(); j++) {
@@ -92,6 +91,7 @@ public class Frame extends JFrame {
         }
 
     }
+
     private void setModifiableInner(int row, int col) {
         for (int i = 0; i < table.getRowCount(); i++) {
             if (table.statuses[i][col] == Status.NONMODIFIABLE) {
@@ -103,13 +103,13 @@ public class Frame extends JFrame {
                 table.statuses[row][j] = Status.MODIFIABLE;
             }
         }
-        }
+    }
 
-     void setButton(){
+    void setButton() {
         button.addActionListener(e -> {
-            String name = person.namefield.getText().replaceAll("\\s+","");
-            String surname = person.surnamefield.getText().replaceAll("\\s+","");
-            String email= person.emailfield.getText().replaceAll("\\s+","");
+            String name = person.namefield.getText().replaceAll("\\s+", "");
+            String surname = person.surnamefield.getText().replaceAll("\\s+", "");
+            String email = person.emailfield.getText().replaceAll("\\s+", "");
             int flag = 0;
 
             try {
@@ -119,7 +119,7 @@ public class Frame extends JFrame {
                         for (int i = 0; i < table.getRowCount(); i++) {
                             for (int j = 0; j < table.getColumnCount(); j++) {
                                 if (table.statuses[i][j] == Status.SELECTED) {
-                                    data2[i][j] = name + " " + surname+" "+email;
+                                    data2[i][j] = name + " " + surname + " " + email;
                                     flag = 1;
                                 }
                             }
@@ -154,4 +154,4 @@ public class Frame extends JFrame {
     }
 
 
-    }
+}

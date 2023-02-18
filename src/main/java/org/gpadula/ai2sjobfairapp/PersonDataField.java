@@ -3,8 +3,7 @@ package org.gpadula.ai2sjobfairapp;
 import javax.swing.*;
 import java.io.Serializable;
 
-public class PersonDataField implements Serializable
-{
+public class PersonDataField implements Serializable {
     final JTextField namefield;
     final JLabel namelabel;
 
@@ -27,7 +26,6 @@ public class PersonDataField implements Serializable
         emaillabel = new JLabel("Email");
         emaillabel.setBounds(50, 110, 80, 20);
         emailfield.setBounds(130, 110, 150, 20);
-
 
 
     }
