@@ -11,6 +11,8 @@ public class Main extends JFrame {
     String rowdata;
     String columndata;
 
+    Frame frame;
+
     public Main() throws IOException {
         stringdata="dati.csv";
         rowdata="righe.csv";
@@ -29,7 +31,7 @@ public class Main extends JFrame {
         JButton button= new JButton();
         button.setText("Register");
         button.setBounds(50,500,95,30);
-        Frame frame= new Frame(person,table,button,databak, stringdata,endstatus);
+        frame= new Frame(person,table,button,databak, stringdata,endstatus);
     }
     public static void main(String[] args) throws IOException {
         try {
@@ -38,7 +40,13 @@ public class Main extends JFrame {
             System.err.println( "Failed to initialize LaF" );
         }
         Main main=new Main();
+        main.start();
     }
+
+     void start(){
+         frame.setTable();
+         frame.setButton();
+     }
     
     
 }

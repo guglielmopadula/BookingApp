@@ -35,14 +35,12 @@ public class Frame extends JFrame {
         this.setLayout(null);
         this.setVisible(true);
         this.add(endstatus);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.setTable();
-        this.setButton();
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
 
 
-    private void setTable(){
+     void setTable(){
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -50,16 +48,16 @@ public class Frame extends JFrame {
                 int col = table.columnAtPoint(evt.getPoint());
                 if (table.statuses[row][col] == Status.MODIFIABLE) {
                     table.statuses[row][col] = Status.SELECTED;
-                    set_unmodifiable_inner(row, col);
+                    setUnmodifiableInner(row, col);
                 } else {
                     if (table.statuses[row][col] == Status.SELECTED) {
                         table.statuses[row][col] = Status.MODIFIABLE;
-                        set_modifiable_inner(row,col);
+                        setModifiableInner(row,col);
                     }
                     for (int i = 0; i < table.getRowCount(); i++) {
                         for (int j = 0; j < table.getColumnCount(); j++) {
                             if (table.statuses[i][j] == Status.SELECTED) {
-                                set_unmodifiable_inner(i, j);
+                                setUnmodifiableInner(i, j);
                             }
                         }
                     }
@@ -81,7 +79,7 @@ public class Frame extends JFrame {
         this.dispose();
     }
 
-    private void set_unmodifiable_inner(int row, int col) {
+    private void setUnmodifiableInner(int row, int col) {
         for (int i = 0; i < table.getRowCount(); i++) {
             if (table.statuses[i][col] == Status.MODIFIABLE) {
                 table.statuses[i][col] = Status.NONMODIFIABLE;
@@ -94,7 +92,7 @@ public class Frame extends JFrame {
         }
 
     }
-    private void set_modifiable_inner(int row, int col) {
+    private void setModifiableInner(int row, int col) {
         for (int i = 0; i < table.getRowCount(); i++) {
             if (table.statuses[i][col] == Status.NONMODIFIABLE) {
                 table.statuses[i][col] = Status.MODIFIABLE;
@@ -107,56 +105,50 @@ public class Frame extends JFrame {
         }
         }
 
-    private void setButton(){
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String name = person.namefield.getText().replaceAll("\\s+","");
-                String surname = person.surnamefield.getText().replaceAll("\\s+","");
-                String email= person.emailfield.getText().replaceAll("\\s+","");
-                int flag = 0;
+     void setButton(){
+        button.addActionListener(e -> {
+            String name = person.namefield.getText().replaceAll("\\s+","");
+            String surname = person.surnamefield.getText().replaceAll("\\s+","");
+            String email= person.emailfield.getText().replaceAll("\\s+","");
+            int flag = 0;
 
-                try {
-                    String[][] data2 = Utils.readCsv(stringdata);
-                    if (Arrays.deepEquals(data, data2)) {
-                        if (!(name.equals("") || surname.equals("") || email.equals(""))) {
-                            for (int i = 0; i < table.getRowCount(); i++) {
-                                for (int j = 0; j < table.getColumnCount(); j++) {
-                                    if (table.statuses[i][j] == Status.SELECTED) {
-                                        data2[i][j] = name + " " + surname+" "+email;
-                                        flag = 1;
-                                    }
+            try {
+                String[][] data2 = Utils.readCsv(stringdata);
+                if (Arrays.deepEquals(data, data2)) {
+                    if (!(name.equals("") || surname.equals("") || email.equals(""))) {
+                        for (int i = 0; i < table.getRowCount(); i++) {
+                            for (int j = 0; j < table.getColumnCount(); j++) {
+                                if (table.statuses[i][j] == Status.SELECTED) {
+                                    data2[i][j] = name + " " + surname+" "+email;
+                                    flag = 1;
                                 }
                             }
-
-                            if (flag == 1) {
-                                Utils.writeCSV(data2, "dati.csv", table.getRowCount(), table.getColumnCount());
-                                endstatus.setForeground(Color.green);
-                                endstatus.setText("You have successfully registered \n The application will close in 10s");
-                                Timer timer = new Timer(10000, new ActionListener() {
-                                    public void actionPerformed(ActionEvent evt) {
-                                        mydispose();
-                                    }
-                                });
-                                timer.setRepeats(false);
-                                timer.start();
-                            } else {
-                                endstatus.setForeground(Color.orange);
-                                endstatus.setText("You have not selected any slot");
-
-                            }
-                        } else {
-                            endstatus.setForeground(Color.orange);
-                            endstatus.setText("Please enter your name/surname/email");
-
                         }
 
+                        if (flag == 1) {
+                            Utils.writeCSV(data2, "dati.csv", table.getRowCount(), table.getColumnCount());
+                            endstatus.setForeground(Color.green);
+                            endstatus.setText("You have successfully registered \n The application will close in 10s");
+                            Timer timer = new Timer(10000, evt -> mydispose());
+                            timer.setRepeats(false);
+                            timer.start();
+                        } else {
+                            endstatus.setForeground(Color.orange);
+                            endstatus.setText("You have not selected any slot");
+
+                        }
                     } else {
-                        endstatus.setForeground(Color.red);
-                        endstatus.setText("You have been too slow, please reopen the page");
+                        endstatus.setForeground(Color.orange);
+                        endstatus.setText("Please enter your name/surname/email");
+
                     }
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
+
+                } else {
+                    endstatus.setForeground(Color.red);
+                    endstatus.setText("You have been too slow, please reopen the page");
                 }
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
         });
     }

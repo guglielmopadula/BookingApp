@@ -32,9 +32,9 @@ public class Utils {
             }
 
         }
-        FileWriter myWriter = new FileWriter(file);
-        myWriter.write(s);
-        myWriter.close();
+        try(FileWriter myWriter = new FileWriter(file)) {
+            myWriter.write(s);
+        }
     }
 
 }
