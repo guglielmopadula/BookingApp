@@ -1,8 +1,9 @@
 package org.gpadula.ai2sjobfairapp;
 
 import javax.swing.*;
+import java.io.Serializable;
 
-public class PersonDataField
+public class PersonDataField implements Serializable
 {
     final JTextField namefield;
     final JLabel namelabel;

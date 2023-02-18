@@ -35,7 +35,7 @@ public class Frame extends JFrame {
         this.setLayout(null);
         this.setVisible(true);
         this.add(endstatus);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setTable();
         this.setButton();
 
