@@ -41,3 +41,13 @@ test {
     useJUnitPlatform()
     }
 mainClassName = 'org.gpadula.ai2sjobfairapp.Main'
+
+jar {
+    manifest {
+        attributes "Main-Class":  "$mainClassName"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

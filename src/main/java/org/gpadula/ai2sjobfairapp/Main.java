@@ -3,7 +3,6 @@ package org.gpadula.ai2sjobfairapp;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.util.logging.Logger;
 
 import com.formdev.flatlaf.FlatLightLaf;
 
